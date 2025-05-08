@@ -1,6 +1,6 @@
-# Book Catalog
+# Guramedia
 
-Laravel CRUD app for book catalogs. Admins can create, view, update, and delete books and categories. Anonymous users can only see the book catalogs and book details.
+Online bookstore created with Laravel. Admins can create, view, update, and delete books and categories. Anonymous users can only see the book catalogs and book details. User can view and buy books.
 
 ## Endpoint
 | Method | Routes | Description |
