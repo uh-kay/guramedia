@@ -28,6 +28,22 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+
+                            <div class="flex flex-col px-2 py-2">
+                                <label for="publisher" class="block mb-2 text-md font-medium text-black">Publisher</label>
+                                <input type="text" class="rounded-lg" id="publisher" name="publisher" value="{{ old('publisher') }}" required>
+                                @error('publisher')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="flex flex-col px-2 py-2">
+                                <label for="published_year" class="block mb-2 text-md font-medium text-black">Published Year</label>
+                                <input type="text" class="rounded-lg" id="published_year" name="published_year" value="{{ old('published_year') }}" required>
+                                @error('published_year')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         
                         <div class="mb-3">

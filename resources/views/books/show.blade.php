@@ -17,7 +17,11 @@
                             <h1 class="text-2xl font-bold">{{ $book->title }}</h1>
                             <p class="text-lg">By <strong>{{ $book->author }}</strong></p>
                             <div class="mb-3">
-                                <span class="badge bg-primary">Category: {{ $book->category->name }}</span>
+                                <span class="badge bg-primary"><strong>Category:</strong> {{ $book->category->name }}</span>
+                                <p>
+                                    <strong>Publisher:</strong> {{ $book->publisher }}<br>
+                                    <strong>Published Year:</strong> {{ $book->published_year }}
+                                </p>
                             </div>
                             <div class="mb-4">
                                 <h3 class="text-xl font-semibold mb-2">Description</h3>
