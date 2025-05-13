@@ -24,6 +24,8 @@ class BookRequest extends FormRequest
         $rules = [
             'title' => 'required|string|max:255',
             'author'=> 'required|string|max:255',
+            'publisher'=> 'required|string|max:255',
+            'published_year'=> 'required|date_format:Y',
             'description'=> 'required|string',
             'category_id'=> 'required|exists:categories,id',
         ];
