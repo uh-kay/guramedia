@@ -8,7 +8,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
-Route::get('/', [BookController::class, 'index'])->name('home');
+Route::view('/', 'welcome')->name('home');
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
 // Profile routes
