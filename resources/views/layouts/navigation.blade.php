@@ -8,13 +8,13 @@
                     <a href="{{ route('home') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
-                    <a class="px-2" href="{{  route('home') }}">
+                    <a class="mx-4" href="{{  route('home') }}">
                         Guramedia
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:flex">
+                <div class="hidden space-x-4 sm:-my-px sm:flex">
                     <!-- Public Links -->
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
                         {{ __('Books') }}

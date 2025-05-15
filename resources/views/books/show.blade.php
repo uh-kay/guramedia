@@ -9,11 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="flex flex-wrap -mx-2">
-                        <div class="col-md-4">
+                    <div class="flex -mx-2">
+                        <div class="md:w-4/12 px-2 ml-8 mb-4">
                             <img src="{{ asset('storage/' . $book->cover) }}" class="rounded max-w-sm h-auto" alt="{{ $book->title }}">
                         </div>
-                        <div class="col-md-8 ml-8">
+                        <div class="md:w-8/12 px-2 ml-8">
                             <h1 class="text-2xl font-bold">{{ $book->title }}</h1>
                             <p class="text-lg">By <strong>{{ $book->author }}</strong></p>
                             <div class="mb-3">
@@ -41,6 +41,13 @@
                                             @method('DELETE')
                                             <button type="submit" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm bg-red-500 hover:bg-red-700 text-white" onclick="return confirm('Are you sure you want to delete this book?')">Delete Book</button>
                                         </form>
+                                    @endif
+                                    @if($book->file)
+                                        <a href="{{ route('books.download', $book) }}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm bg-green-500 hover:bg-green-700 text-white">
+                                            Download Book
+                                        </a>
+                                    @else
+                                        <p class="text-muted">PDF not available for this book.</p>
                                     @endif
                                 @endauth
                             </div>
