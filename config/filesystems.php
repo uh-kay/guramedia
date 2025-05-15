@@ -60,6 +60,13 @@ return [
             'report' => false,
         ],
 
+        'books' => [
+        'driver' => 'local',
+        'root' => storage_path('app/books'),
+        'url' => env('APP_URL').'/storage/books',
+        'visibility' => 'private',
+        ],
+        
     ],
 
     /*

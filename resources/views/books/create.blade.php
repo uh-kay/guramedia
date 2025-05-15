@@ -83,6 +83,17 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <div class="px-2">
+                                <label for="file" class="block mb-2 text-md font-medium text-black">Book File</label>
+                                <input type="file" class="w-full text-slate-500 font-medium text-base bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" id="file" name="pdf_file" accept=".pdf,.epub,.mobi" required>
+                                <div class="text-sm">Upload PDF format for the book.</div>
+                                @error('file')
+                                    <div>{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                         
                         <div class="mb-3">
                             <div class="px-2">

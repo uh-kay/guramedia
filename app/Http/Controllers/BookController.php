@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Requests\BookRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Book;
+use App\Models\BookFile;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -67,7 +69,11 @@ class BookController extends Controller
             $data['cover'] = $path;
         }
         
-        Book::create($data);
+        $book = Book::create($data);
+
+        if ($request->hasFile('pdf_file')) {
+            $this->upload_file($request, $book);
+        }
         
         return redirect()->route('books.index')
             ->with('success', 'Book added successfully.');
@@ -112,6 +118,10 @@ class BookController extends Controller
         }
         
         $book->update($data);
+
+        if ($request->hasFile('pdf_file')) {
+            $this->upload_file($request, $book);
+        }
         
         return redirect()->route('books.index')
             ->with('success', 'Book updated successfully.');
@@ -131,5 +141,46 @@ class BookController extends Controller
         
         return redirect()->route('books.index')
             ->with('success', 'Book deleted successfully.');
+    }
+
+    public function upload_file(Request $request, Book $book)
+    {
+        $request->validate([
+            'pdf_file' => 'required|file|mimes:pdf,epub|max:10240',
+        ]);
+
+        if ($book->file) {
+            Storage::disks('books')->delete($book->file->path);
+            $book->file->delete();
+        }
+
+        $file = $request->file('pdf_file');
+        $filename = $file->getClientOriginalName();
+        $path = $file->store('pdfs', 'books');
+
+        BookFile::create([
+            'book_id' => $book->id,
+            'filename' => $filename,
+            'path' => $path,
+            'mime_type' => $file->getClientMimeType(),
+            'size' => $file->getSize(),
+        ]);
+
+        return redirect()->route('books.show', $book)
+            ->with('success', 'File uploaded successfully.');
+    }
+
+    public function download(Book $book)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        if ($book->file) {
+            return Storage::disk('books')->download($book->file->path, $book->file->filename);
+        }
+
+        return redirect()->route('books.show', $book)
+            ->with('error', 'No file found for this book.');
     }
 }

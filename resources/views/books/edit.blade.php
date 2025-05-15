@@ -84,6 +84,17 @@
                                 <img src="{{ asset('storage/' . $book->cover) }}" alt="{{ $book->title }}" class="img-thumbnail" style="max-height: 150px;">
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <div class="px-2">
+                                <label for="file" class="block mb-2 text-md font-medium text-black">Book File</label>
+                                <input type="file" class="w-full text-slate-500 font-medium text-base bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" id="file" name="pdf_file" accept=".pdf,.epub,.mobi" required>
+                                <div class="text-sm">Upload EPUB or PDF format for the book.</div>
+                                @error('file')
+                                    <div>{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                         
                         <div class="mb-3">
                             <button type="submit" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm bg-blue-500 hover:bg-blue-700 text-white">Update Book</button>

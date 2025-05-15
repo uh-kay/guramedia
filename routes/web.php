@@ -8,8 +8,13 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
-Route::get('/', [BookController::class, 'index'])->name('home');
+Route::view('/', 'welcome')->name('home');
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
+
+// User routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/books/{book}/download', [BookController::class, 'download'])->name('books.download');
+});
 
 // Profile routes
 Route::middleware(['auth'])->group(function (){
@@ -30,6 +35,7 @@ Route::middleware(AdminMiddleware::class)->group(function (){
     Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
     Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::post('/books/{book}/upload-pdf', [BookController::class, 'upload'])->name('books.upload-pdf');
 
     // Category management
     Route::resource('categories', CategoryController::class);
