@@ -34,5 +34,8 @@ And auth route provided by Breeze.
 1. Make sure you have PHP and Laravel installed.
 2. Clone the repository.
 3. `cd` into project directory.
-4. Run `composer run dev`.
-5. Go to http://localhost:8000.
+4. `composer install` and `npm install`.
+5. Edit the .env file and run `php artisan key:generate && php artisan migrate`.
+6. Run `php artisan storage:link` to link storage to /public/uploads.
+7. Run `composer run dev`.
+8. Go to http://localhost:8000.
